@@ -1,7 +1,8 @@
+// pages/index.tsx
 export default function Home() {
   return (
-    <main>
-      {/* Future content will go here */}
-    </main>
+    <div className="min-h-screen flex items-center justify-center">
+      <h1 className="text-xl font-semibold">Welcome to Luminalogix</h1>
+    </div>
   );
 }

@@ -1,8 +1,6 @@
 "use client";
 import React from "react";
-import { motion } from "framer-motion";
 import Link from "next/link";
-import { Dropdown } from "./Dropdown";
 
 export const Header = () => {
   return (
@@ -12,27 +10,6 @@ export const Header = () => {
         <Link href="/" className="text-xl font-display font-semibold text-charcoal">
           Luminalogix
         </Link>
-
-        {/* Navigation Links */}
-        <div className="hidden md:flex gap-6 text-sm font-medium text-charcoal">
-          <Link href="/">Home</Link>
-          <Dropdown label="Shop" links={["Men", "Women", "New", "Trending"]} />
-          <Dropdown label="Collections" links={["AI Picks", "Sustainable Styles"]} />
-          <Link href="/about">About</Link>
-          <Link href="/journal">Journal</Link>
-          <Link href="/contact">Contact</Link>
-        </div>
-
-        {/* Search */}
-        <div className="flex items-center gap-4">
-          <div className="relative group">
-            <input
-              type="text"
-              placeholder="Search..."
-              className="hidden md:block w-32 group-hover:w-48 transition-all duration-300 ease-in-out px-3 py-1 text-sm rounded-full border border-charcoal/20 bg-white focus:outline-none"
-            />
-          </div>
-        </div>
       </nav>
     </header>
   );
