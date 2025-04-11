@@ -1,22 +1,32 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* Reset styles */
-html, body {
-  height: 100%;
-  min-height: 100%;
-  overflow-x: hidden;
-  scroll-behavior: smooth;
+/* Header and Navbar */
+header {
+  background-color: #f8f9fa; /* Light background */
 }
 
-body {
-  font-feature-settings: "kern";
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+button {
+  cursor: pointer;
 }
 
-/* Additional resets or styles for the new layout */
-footer {
-  margin-top: auto;
+button:hover {
+  background-color: #4C9A2A; /* Olive color for hover */
+}
+
+/* Hamburger Menu */
+.hamburger-menu {
+  display: none;
+}
+
+/* For mobile responsiveness */
+@media (max-width: 768px) {
+  .hamburger-menu {
+    display: block;
+  }
+
+  .menu-links {
+    display: none;
+  }
+
+  .menu-links.open {
+    display: block;
+  }
 }
