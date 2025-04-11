@@ -1,9 +1,7 @@
-import { Hero } from "@/components/sections/Hero";
-
 export default function Home() {
   return (
     <main>
-      <Hero />
+      {/* Future content will go here */}
     </main>
   );
 }

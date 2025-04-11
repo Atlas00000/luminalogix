@@ -23,7 +23,7 @@ export const Header = () => {
           <Link href="/contact">Contact</Link>
         </div>
 
-        {/* Search + Cart */}
+        {/* Search */}
         <div className="flex items-center gap-4">
           <div className="relative group">
             <input
@@ -32,15 +32,6 @@ export const Header = () => {
               className="hidden md:block w-32 group-hover:w-48 transition-all duration-300 ease-in-out px-3 py-1 text-sm rounded-full border border-charcoal/20 bg-white focus:outline-none"
             />
           </div>
-          <Link href="/cart">
-            <motion.div
-              whileHover={{ scale: 1.1 }}
-              className="relative p-2 rounded-full bg-charcoal text-white hover:bg-olive transition"
-            >
-              🛒
-              <span className="absolute -top-1 -right-1 text-xs bg-accent text-black rounded-full px-1">2</span>
-            </motion.div>
-          </Link>
         </div>
       </nav>
     </header>
