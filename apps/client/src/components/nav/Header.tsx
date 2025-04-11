@@ -1,10 +1,14 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-import { HamburgerMenu } from "./HamburgerMenu"; // Import Hamburger menu
 
 export const Header = () => {
-  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // Toggle mobile menu
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-brand-light/80 backdrop-blur-md shadow-sm">
@@ -14,35 +18,29 @@ export const Header = () => {
           Luminalogix
         </Link>
 
-        {/* Navigation Links */}
+        {/* Desktop Menu Links */}
         <div className="hidden md:flex gap-6 text-sm font-medium text-charcoal">
           <Link href="/">Home</Link>
-          <Link href="/about">About</Link>
           <Link href="/shop">Shop</Link>
+          <Link href="/about">About</Link>
           <Link href="/contact">Contact</Link>
-          <button className="text-white bg-olive hover:bg-olive-dark px-6 py-2 rounded-full transition">
-            Shop Now
-          </button>
         </div>
 
-        {/* Hamburger Menu (Mobile) */}
-        <div className="md:hidden">
-          <HamburgerMenu isOpen={isMobileMenuOpen} toggleMenu={() => setMobileMenuOpen(!isMobileMenuOpen)} />
+        {/* Hamburger Menu for mobile */}
+        <div className="hamburger-menu md:hidden" onClick={toggleMenu}>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        {/* Mobile Menu */}
+        <div className={`menu-links ${isMenuOpen ? "open" : ""}`}>
+          <Link href="/" onClick={toggleMenu}>Home</Link>
+          <Link href="/shop" onClick={toggleMenu}>Shop</Link>
+          <Link href="/about" onClick={toggleMenu}>About</Link>
+          <Link href="/contact" onClick={toggleMenu}>Contact</Link>
         </div>
       </nav>
-
-      {/* Mobile Menu (Toggle visibility on mobile) */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden flex flex-col gap-4 px-6 py-4 bg-white shadow-md">
-          <Link href="/">Home</Link>
-          <Link href="/about">About</Link>
-          <Link href="/shop">Shop</Link>
-          <Link href="/contact">Contact</Link>
-          <button className="text-white bg-olive hover:bg-olive-dark px-6 py-2 rounded-full transition">
-            Shop Now
-          </button>
-        </div>
-      )}
     </header>
   );
 };

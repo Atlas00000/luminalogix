@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 interface HamburgerMenuProps {
   isOpen: boolean;
@@ -9,7 +10,7 @@ interface HamburgerMenuProps {
 export const HamburgerMenu: React.FC<HamburgerMenuProps> = ({ isOpen, toggleMenu }) => {
   return (
     <div className="md:hidden flex items-center gap-4">
-      <button onClick={toggleMenu} className="text-charcoal">
+      <button type="button" onClick={toggleMenu} className="text-charcoal" title="Toggle menu">
         <motion.div
           animate={{ rotate: isOpen ? 90 : 0 }}
           transition={{ duration: 0.3 }}

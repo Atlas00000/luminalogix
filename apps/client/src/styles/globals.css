@@ -1,32 +1,80 @@
-/* Header and Navbar */
-header {
-  background-color: #f8f9fa; /* Light background */
+/* @tailwind base; */
+@tailwind utilities;
+@tailwind utilities;
+
+/* Reset styles */
+html, body {
+  height: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
-button {
-  cursor: pointer;
+body {
+  font-feature-settings: "kern";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-button:hover {
-  background-color: #4C9A2A; /* Olive color for hover */
+/* Footer specific styles */
+footer {
+  background-color: #333; /* Dark background */
+  color: #fff; /* White text */
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  margin-top: auto; /* Ensures footer stays at the bottom if the content is short */
 }
 
-/* Hamburger Menu */
-.hamburger-menu {
-  display: none;
+footer .footer-content {
+  max-width: 7xl;
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
-/* For mobile responsiveness */
+footer .footer-links {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+footer .footer-links a {
+  text-decoration: none;
+  color: #fff;
+  transition: color 0.3s ease;
+}
+
+footer .footer-links a:hover {
+  color: #4C9A2A; /* Olive green hover effect */
+}
+
+footer .social-links {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+footer .social-links a {
+  text-decoration: none;
+  color: #fff;
+  transition: color 0.3s ease;
+}
+
+footer .social-links a:hover {
+  color: #4C9A2A; /* Olive green hover effect */
+}
+
+footer .copyright {
+  font-size: 0.875rem;
+  color: #ccc;
+  text-align: center;
+}
+
+/* Make sure footer doesn't overflow in small screen */
 @media (max-width: 768px) {
-  .hamburger-menu {
-    display: block;
-  }
-
-  .menu-links {
-    display: none;
-  }
-
-  .menu-links.open {
-    display: block;
+  footer .footer-links,
+  footer .social-links {
+    flex-direction: column;
+    align-items: center;
   }
 }
