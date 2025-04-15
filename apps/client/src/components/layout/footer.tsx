@@ -18,7 +18,7 @@ export const Footer = () => {
           <Link href="/contact" className="hover:text-olive">Contact</Link>
         </div>
 
-        {/* Social Media Links (Optional) */}
+        {/* Social Media Links  */}
         <div className="flex gap-6 mb-6">
           <a href="#" className="hover:text-olive">Facebook</a>
           <a href="#" className="hover:text-olive">Twitter</a>
