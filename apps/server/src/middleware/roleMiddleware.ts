@@ -6,7 +6,8 @@ export const authorizeRoles = (...roles: string[]): RequestHandler => {
     const user = (req as AuthenticatedRequest).user;
 
     if (!user || !roles.includes(user.role)) {
-      return res.status(403).json({ message: 'Forbidden: Access denied' });
+      res.status(403).json({ message: 'Forbidden: Access denied' });
+      return;
     }
 
     next();
