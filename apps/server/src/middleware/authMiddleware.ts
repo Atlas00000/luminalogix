@@ -3,7 +3,7 @@ import jwt, { JwtPayload } from 'jsonwebtoken';
 
 const secret = process.env.JWT_SECRET || 'defaultsecret';
 
-interface AuthenticatedRequest extends Request {
+export interface AuthenticatedRequest extends Request {
   user?: { userId: number; role: string };
 }
 
@@ -11,11 +11,12 @@ export const authenticate = (
   req: AuthenticatedRequest,
   res: Response,
   next: NextFunction
-) => {
+): void => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    return res.status(401).json({ message: 'Unauthorized: No token provided' });
+    res.status(401).json({ message: 'Unauthorized: No token provided' });
+    return;
   }
 
   const token = authHeader.split(' ')[1];
@@ -30,6 +31,6 @@ export const authenticate = (
 
     next();
   } catch (err) {
-    return res.status(403).json({ message: 'Forbidden: Invalid token' });
+    res.status(403).json({ message: 'Forbidden: Invalid token' });
   }
 };
