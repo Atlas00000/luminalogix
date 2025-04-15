@@ -1,17 +1,14 @@
-import { Request, Response, NextFunction } from 'express';
+import { RequestHandler } from 'express';
+import { AuthenticatedRequest } from '../types/AuthenticatedRequest';
 
-interface AuthenticatedRequest extends Request {
-  user?: {
-    userId: number;
-    role: string;
-  };
-}
+export const authorizeRoles = (...roles: string[]): RequestHandler => {
+  return (req, res, next) => {
+    const user = (req as AuthenticatedRequest).user;
 
-export const authorizeRoles = (...allowedRoles: string[]) => {
-  return (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
-    if (!req.user || !allowedRoles.includes(req.user.role)) {
-      return res.status(403).json({ message: 'Forbidden: Insufficient role' });
+    if (!user || !roles.includes(user.role)) {
+      return res.status(403).json({ message: 'Forbidden: Access denied' });
     }
+
     next();
   };
 };

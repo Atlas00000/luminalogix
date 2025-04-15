@@ -1,17 +1,10 @@
-import { Request, Response, NextFunction } from 'express';
+import { RequestHandler } from 'express';
 import jwt, { JwtPayload } from 'jsonwebtoken';
+import { AuthenticatedRequest } from '../types/AuthenticatedRequest';
 
 const secret = process.env.JWT_SECRET || 'defaultsecret';
 
-export interface AuthenticatedRequest extends Request {
-  user?: { userId: number; role: string };
-}
-
-export const authenticate = (
-  req: AuthenticatedRequest,
-  res: Response,
-  next: NextFunction
-): void => {
+export const authenticate: RequestHandler = (req, res, next) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -24,7 +17,7 @@ export const authenticate = (
   try {
     const decoded = jwt.verify(token, secret) as JwtPayload;
 
-    req.user = {
+    (req as AuthenticatedRequest).user = {
       userId: decoded.userId,
       role: decoded.role,
     };

@@ -5,17 +5,17 @@ import { AuthenticatedRequest } from '../types/AuthenticatedRequest';
 
 export const router = express.Router();
 
-// Authenticated route for all users
-router.get('/dashboard', authenticate, (req: AuthenticatedRequest, res) => {
-  res.json({ message: 'Welcome to your dashboard', user: req.user });
+router.get('/dashboard', authenticate, (req, res) => {
+  const user = (req as AuthenticatedRequest).user;
+  res.json({ message: 'Welcome to your dashboard', user });
 });
 
-// Admin-only route
-router.get('/admin', authenticate, authorizeRoles('admin'), (req: AuthenticatedRequest, res) => {
-  res.json({ message: 'Hello Admin 👑', user: req.user });
+router.get('/admin', authenticate, authorizeRoles('admin'), (req, res) => {
+  const user = (req as AuthenticatedRequest).user;
+  res.json({ message: 'Hello Admin 👑', user });
 });
 
-// Staff or Admin route
-router.get('/staff', authenticate, authorizeRoles('admin', 'staff'), (req: AuthenticatedRequest, res) => {
-  res.json({ message: 'Staff content only 📋', user: req.user });
+router.get('/staff', authenticate, authorizeRoles('admin', 'staff'), (req, res) => {
+  const user = (req as AuthenticatedRequest).user;
+  res.json({ message: 'Staff content only 📋', user });
 });
