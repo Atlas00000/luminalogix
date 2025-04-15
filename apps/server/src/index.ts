@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import authRoutes from './routes/auth.routes';
+import { router as protectedRoutes } from './routes/protected.routes'; // ✅ FIXED
 import { errorHandler } from './middleware/errorHandler';
 
 dotenv.config();
@@ -17,6 +18,9 @@ app.get('/api/health', (_, res) => {
 
 // Auth routes
 app.use('/api/auth', authRoutes);
+
+// ✅ Protected routes
+app.use('/api/protected', protectedRoutes);
 
 // Global error handler
 app.use(errorHandler);
