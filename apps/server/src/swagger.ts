@@ -1,3 +1,4 @@
+import { Router } from 'express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 
@@ -11,8 +12,17 @@ const options = {
     },
     servers: [{ url: 'http://localhost:5000' }]
   },
-  apis: ['./src/routes/*.tsx'] // ⬅️ scans every route file for annotations
+  // Scan both .ts and .tsx route files
+  apis: ['src/routes/*.{ts,tsx}']
 };
 
 export const swaggerSpec = swaggerJsdoc(options);
 export { swaggerUi };
+
+/* ➕ Router to serve raw JSON for CI / Postman conversion */
+export const swaggerJsonRouter = Router();
+import { Request, Response } from 'express';
+
+swaggerJsonRouter.get('/docs-json', (req: Request, res: Response) => {
+  res.json(swaggerSpec);
+});

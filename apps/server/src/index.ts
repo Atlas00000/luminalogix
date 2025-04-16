@@ -7,36 +7,38 @@ import { router as protectedRoutes } from './routes/protected.routes';
 import { errorHandler } from './middleware/errorHandler';
 
 /* ➕ Swagger */
-import { swaggerUi, swaggerSpec } from './swagger';
+import { swaggerUi, swaggerSpec, swaggerJsonRouter } from './swagger';
 
 dotenv.config();
 
 const app = express();
 
-/* ────── Global Middleware ────── */
+/* ────── Global Middleware ────── */
 app.use(cors());
 app.use(express.json());
 
-/* ────── Swagger Docs ────── */
+/* ────── Swagger Docs ────── */
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use('/api', swaggerJsonRouter); // raw JSON at /api/docs-json
 
-/* ────── Health Check ────── */
+/* ────── Health Check ────── */
 app.get('/api/health', (_, res) => {
   res.json({ status: 'OK', message: 'Luminalogix API is running' });
 });
 
-/* ────── Public Routes ────── */
+/* ────── Public Routes ────── */
 app.use('/api/auth', authRoutes);
 
-/* ────── Protected Routes ────── */
+/* ────── Protected Routes ────── */
 app.use('/api/protected', protectedRoutes);
 
-/* ────── Global Error Handler ────── */
+/* ────── Global Error Handler ────── */
 app.use(errorHandler);
 
-/* ────── Start Server ────── */
+/* ────── Start Server ────── */
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`🚀  Server running at http://localhost:${PORT}`);
-  console.log(`📚  Swagger docs at http://localhost:${PORT}/api/docs`);
+  console.log(`📚  Swagger UI  : http://localhost:${PORT}/api/docs`);
+  console.log(`📄  Swagger JSON: http://localhost:${PORT}/api/docs-json`);
 });
