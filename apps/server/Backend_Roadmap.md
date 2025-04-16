@@ -236,3 +236,106 @@ Secured and loaded in index.ts
 ✅ Summary of Progress
 We’ve completed the foundational backend system and database integration for Luminalogix. We now have user authentication (register, login), JWT auth, hashed passwords, protected routes, role-based access control (admin, staff, etc.), and health monitoring. Prisma is fully integrated with PostgreSQL, and our services/controllers/routes architecture is modular and ready to scale.
 
+
+
+🧪 API Test Summary for Luminalogix Backend (Phase 1 – Auth & RBAC)
+
+Health Check
+
+Method: GET
+
+URL: http://localhost:5000/api/health
+
+Expected Response (200 OK):
+
+{ "status": "OK", "message": "Luminalogix API is running" }
+
+Register a New User
+
+Method: POST
+
+URL: http://localhost:5000/api/auth/register
+
+Headers:
+
+Content-Type: application/json
+
+Body:
+
+{ "name": "Jane Doe", "email": "jane@example.com", "password": "securepassword" }
+
+Expected Response (201 Created):
+
+{ "token": "JWT_TOKEN_STRING", "user": { "id": 1, "email": "jane@example.com", "name": "Jane Doe" } }
+
+Login (Obtain Token)
+
+Method: POST
+
+URL: http://localhost:5000/api/auth/login
+
+Headers:
+
+Content-Type: application/json
+
+Body:
+
+{ "email": "jane@example.com", "password": "securepassword" }
+
+Expected Response (200 OK):
+
+{ "token": "JWT_TOKEN_STRING", "user": { "id": 1, "email": "jane@example.com", "name": "Jane Doe" } }
+
+Authenticated Route – User Dashboard
+
+Method: GET
+
+URL: http://localhost:5000/api/protected/dashboard
+
+Headers:
+
+Authorization: Bearer JWT_TOKEN_STRING
+
+Expected Response (200 OK):
+
+{ "message": "Welcome to your dashboard", "user": { "userId": 1, "role": "customer" // or whatever role is assigned } }
+
+Role-Based Route – Admin Only
+
+Method: GET
+
+URL: http://localhost:5000/api/protected/admin
+
+Headers:
+
+Authorization: Bearer JWT_TOKEN_STRING
+
+Expected Response:
+
+✅ If role === admin
+
+{ "message": "Hello Admin 👑", "user": { "userId": 1, "role": "admin" } }
+
+❌ If role !== admin
+
+{ "message": "Forbidden: Insufficient role" }
+
+Role-Based Route – Staff or Admin
+
+Method: GET
+
+URL: http://localhost:5000/api/protected/staff
+
+Headers:
+
+Authorization: Bearer JWT_TOKEN_STRING
+
+Expected Response:
+
+✅ If role is staff or admin
+
+{ "message": "Staff content only 📋", "user": { "userId": 2, "role": "staff" } }
+
+❌ If role is customer or missing
+
+{ "message": "Forbidden: Insufficient role" }
