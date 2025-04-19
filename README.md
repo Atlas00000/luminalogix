@@ -1,77 +1,101 @@
 # Luminalogix 📦
 
-AI‑Powered Fashion Commerce (Next.js Frontend + Express API + Postgres)
+AI‑Powered Fashion Commerce Platform  
+Full‑stack Next.js Frontend • Express API • PostgreSQL (Prisma) • Docker & Render Hosting
 
 ---
 
 ## 🎯 Project Overview
 
-Luminalogix is a full‑stack, AI‑driven e‑commerce prototype showcasing:
-- **Personalized UX** via AI recommendations  
-- **Dynamic Content** with server‑ and client‑side rendering  
-- **Secure Auth** (JWT + bcrypt) with role‑based access  
-- **Robust Data Layer** (PostgreSQL + Prisma)  
-- **Automated API Docs** (Swagger + Postman)  
-- **Dockerized** for local dev & free‑tier hosting
+Luminalogix is a demo e‑commerce prototype that showcases:
+- **AI‑Driven UX**: Personalized “Outfit Picks” and dynamic content  
+- **Robust Auth**: JWT‑backed register/login with role‑based access (Admin/Staff/Customer)  
+- **Scalable Data Layer**: PostgreSQL managed via Prisma ORM  
+- **Auto‑Generated API Docs**: Swagger UI & downloadable OpenAPI spec  
+- **Containerized Dev & Prod**: Docker Compose locally, Docker‑on‑Render in free tier  
 
 ---
 
 ## 🚦 Roadmap & Milestones
 
-| Phase               | Description                                       | Status     |
-|---------------------|---------------------------------------------------|------------|
-| **Phase 1 (MVP)**   | • User Auth (register/login) <br> • Health check <br> • Role middleware <br> • Swagger UI <br> • Postman collection | ✅ Done    |
-| **Phase 2**         | • Products CRUD <br> • Collections API <br> • Cart & session management <br> • Front‑end product pages | 🔜 Next    |
-| **Phase 3**         | • Checkout integration (Stripe) <br> • Order history <br> • Admin dashboard <br> • Webhooks | 🕒 Future |
-| **Phase 4**         | • Optimization & scaling (Redis cache, queue) <br> • Analytics dashboards <br> • Multi‑region deployment | 🕒 Future |
+| Phase            | Scope & Features                                                                                                                                     | Status    |
+|------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|-----------|
+| **Phase 1 (MVP)**| • User auth (register/login) <br> • Role middleware (Admin/Staff) <br> • Health check <br> • Swagger UI & OpenAPI export <br> • Docker Compose setup | ✅ Done   |
+| **Phase 2**      | • Product CRUD API & pages <br> • Collections & filters <br> • Shopping cart state (client + session) <br> • Journal/Stories feed                    | 🔜 Next   |
+| **Phase 3**      | • Checkout & Stripe integration <br> • Order history & receipts <br> • Admin panel (product management)                                               | 🕒 Future |
+| **Phase 4**      | • Performance & caching (Redis) <br> • Analytics dashboards <br> • Multi‑region deploy & CD                                                             | 🕒 Future |
 
 ---
 
 ## 📁 Folder Structure
 
-luminalogix/ │ ├─ apps/ │ ├─ client/ # Next.js frontend │ │ ├─ public/ # static assets │ │ ├─ src/ │ │ │ ├─ app/ # Next.js pages/components │ │ │ ├─ components/ # shared UI │ │ │ ├─ styles/ # Tailwind & global CSS │ │ ├─ Dockerfile │ │ ├─ package.json │ │ └─ tsconfig.json │ │ │ └─ server/ # Express + Prisma API │ ├─ prisma/ # schema & migrations │ ├─ src/ │ │ ├─ controllers/ # HTTP → logic │ │ ├─ services/ # business logic │ │ ├─ routes/ # Express routers │ │ ├─ middleware/ # auth, error handling │ │ ├─ utils/ # hash, jwt helpers │ │ └─ index.ts # app entrypoint │ ├─ Dockerfile │ ├─ package.json │ └─ tsconfig.json │ ├─ prisma/ # optional root‑level schema (if used) ├─ docker-compose.yml # local multi‑container setup ├─ README.md # ← you’re reading this └─ render.yaml # Render.com infra as code
+```text
+luminalogix/
+├─ apps/
+│  ├─ client/                   # Next.js frontend
+│  │  ├─ public/                # Static assets
+│  │  ├─ src/
+│  │  │  ├─ app/                # Next.js app/router pages
+│  │  │  ├─ components/         # Shared UI components
+│  │  │  ├─ styles/             # Tailwind & globals
+│  │  ├─ Dockerfile             # Frontend container build
+│  │  ├─ package.json
+│  │  └─ tsconfig.json
+│  │
+│  └─ server/                   # Express + Prisma API
+│     ├─ prisma/                # schema.prisma & migrations
+│     ├─ src/
+│     │  ├─ controllers/        # Route handlers
+│     │  ├─ services/           # Business logic
+│     │  ├─ routes/             # Express routers
+│     │  ├─ middleware/         # Auth, error handlers
+│     │  ├─ utils/              # Helpers (hash, jwt)
+│     │  └─ index.ts            # App entrypoint
+│     ├─ Dockerfile             # Backend container build
+│     ├─ package.json
+│     └─ tsconfig.json
+│
+├─ docker-compose.yml           # Local dev: Postgres + API + Frontend
+├─ README.md                    # This file
+└─ render.yaml                  # Render.com infra‑as‑code
+⚙️ Tech Stack
+Frontend: Next.js 15, React 19, Framer‑Motion, Tailwind CSS, Zustand
 
-yaml
+Backend: Node.js, Express 5, Prisma 6, PostgreSQL
+
+Auth: JWT (jsonwebtoken), bcryptjs
+
+Docs: Swagger (swagger‑jsdoc, swagger‑ui‑express), Postman collection
+
+Containerization: Docker, Docker Compose, free‑tier Render services
+
+🛠 Local Development
+Clone & Install
+
+bash
 Copy
 Edit
+git clone https://github.com/Atlas00000/luminalogix.git
+cd luminalogix
+Environment Files
 
----
+Copy root .env.example → apps/server/.env
 
-## ⚙️ Tech Stack
+Copy root .env.example → apps/client/.env.local
 
-- **Frontend:** Next.js 15, React 19, Framer‑Motion, Tailwind CSS, Zustand  
-- **Backend:** Node.js, Express 5, Prisma 6, PostgreSQL  
-- **Auth:** JWT (jsonwebtoken), bcryptjs  
-- **Docs:** Swagger (swagger-jsdoc, swagger-ui‑express), Postman  
-- **Containers:** Docker, docker‑compose  
-- **Hosting:** Render (free web services + Postgres), Vercel/Neon (alternative)
+Populate with your local values:
 
----
-
-## 🛠 Local Development
-
-1. **Clone & install root deps**  
-   ```bash
-   git clone https://github.com/Atlas00000/luminalogix.git
-   cd luminalogix
-Env files
-
-Copy .env.example → apps/server/.env and set:
-
-ini
+dotenv
 Copy
 Edit
-DATABASE_URL="postgres://postgres:postgres@db:5432/luminalogix"
-JWT_SECRET="YOUR_SECRET"
+# apps/server/.env
 PORT=5000
-Copy .env.example → apps/client/.env.local and set:
+DATABASE_URL="postgres://postgres:postgres@db:5432/luminalogix"
+JWT_SECRET="super-secret-key"
 
-ini
-Copy
-Edit
+# apps/client/.env.local
 NEXT_PUBLIC_API_URL="http://localhost:5000"
-PORT=3000
-Start with Docker
+Bring Up All Services
 
 bash
 Copy
@@ -79,13 +103,9 @@ Edit
 docker compose up --build
 Frontend → http://localhost:3000
 
-Backend → http://localhost:5000/api/health
+API → http://localhost:5000/api/health
 
-API Docs
-
-Swagger UI → http://localhost:5000/api/docs
-
-OpenAPI JSON → curl http://localhost:5000/api/docs-json > openapi.json
+Swagger → http://localhost:5000/api/docs
 
 Run Migrations
 
@@ -95,43 +115,49 @@ Edit
 cd apps/server
 npx prisma migrate dev --name init
 🌐 Free Hosting on Render.com
-Push code to GitHub.
+1. Postgres Database
+Create Free PostgreSQL in Render → grab connection URL.
 
-Backend Service
+2. Backend Service
+New Web Service → Docker → Root: apps/server → Dockerfile
 
-Create Web Service → Docker → Root: apps/server → Dockerfile
+Env Vars:
 
-Env Vars: set DATABASE_URL, JWT_SECRET
+DATABASE_URL → Render Postgres URL
 
-Postgres Database
+JWT_SECRET → your secret
 
-Create a free database → copy its connection string → assign to backend’s DATABASE_URL
+(leave PORT unset)
 
-Frontend Service
+3. Frontend Service
+New Web Service → Docker → Root: apps/client → Dockerfile
 
-Create Web Service → Docker → Root: apps/client → Dockerfile
+Env Vars:
 
-Env Vars: NEXT_PUBLIC_API_URL=https://<backend-url>
+NEXT_PUBLIC_API_URL → https://<your-backend>.onrender.com
 
-Start Command: npm start (Dockerfile handles sh -c)
+4. Auto‑Run Migrations on Startup
+Our backend Dockerfile’s CMD already runs:
 
-Run Prisma Migrations
+bash
+Copy
+Edit
+npx prisma migrate deploy && node dist/index.js
+so your hosted DB is always up‑to‑date.
 
-In Backend’s Render Shell: npx prisma migrate deploy
+🤝 API Reference
 
-🤝 API Endpoints
-
-Method	Path	Description
-POST	/api/auth/register	Register user (201)
-POST	/api/auth/login	Login user (200)
-GET	/api/protected/dashboard	Dashboard (auth required)
-GET	/api/protected/admin	Admin only
-GET	/api/protected/staff	Staff/Admin
-GET	/api/health	Health check (public)
+Method	Endpoint	Description
+POST	/api/auth/register	Register new user (201)
+POST	/api/auth/login	Log in user (200)
+GET	/api/protected/dashboard	Customer dashboard (200)
+GET	/api/protected/admin	Admin‑only (200)
+GET	/api/protected/staff	Staff/Admin (200)
+GET	/api/health	Health check (200)
 GET	/api/docs	Swagger UI
-📚 Resources & References
-Prisma Schema & Migrations → apps/server/prisma/schema.prisma
+📚 Resources
+OpenAPI JSON: /api/docs-json
 
-Swagger Annotations → in apps/server/src/routes/*.ts
+Postman: luminalogix.postman_collection.json
 
-Postman Collection → luminalogix.postman_collection.json
+Prisma schema: apps/server/prisma/schema.prisma

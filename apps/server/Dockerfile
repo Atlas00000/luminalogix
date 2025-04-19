@@ -19,9 +19,10 @@ ENV NODE_ENV=production
 
 # Copy prod files from builder
 COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/prisma ./prisma
+COPY --from=builder /app/dist         ./dist
+COPY --from=builder /app/prisma       ./prisma
 
-# Removed: COPY .env.docker .env  (env comes from docker‑compose)
 EXPOSE 5000
-CMD ["node", "dist/index.js"]
+
+# On container start: run migrations, then launch the server
+CMD ["sh", "-c", "npx prisma migrate deploy && node dist/index.js"]
