@@ -1,186 +1,137 @@
-Luminalogix 🧠🛍️
-AI-Powered E-commerce Experience for Fashion and Lifestyle
+# Luminalogix 📦
 
-Luminalogix is a cutting-edge AI-driven retail platform combining immersive UI/UX, intelligent product recommendations, seamless checkout, and robust backend infrastructure for modern online commerce. Built for scalability, personalization, and performance — it’s a learning-driven full-stack project.
+AI‑Powered Fashion Commerce (Next.js Frontend + Express API + Postgres)
 
-📌 Table of Contents
-Project Overview
+---
 
-Tech Stack
+## 🎯 Project Overview
 
-Development Phases
+Luminalogix is a full‑stack, AI‑driven e‑commerce prototype showcasing:
+- **Personalized UX** via AI recommendations  
+- **Dynamic Content** with server‑ and client‑side rendering  
+- **Secure Auth** (JWT + bcrypt) with role‑based access  
+- **Robust Data Layer** (PostgreSQL + Prisma)  
+- **Automated API Docs** (Swagger + Postman)  
+- **Dockerized** for local dev & free‑tier hosting
 
-Core Features
+---
 
-Folder Structure
+## 🚦 Roadmap & Milestones
 
-Setup Instructions
+| Phase               | Description                                       | Status     |
+|---------------------|---------------------------------------------------|------------|
+| **Phase 1 (MVP)**   | • User Auth (register/login) <br> • Health check <br> • Role middleware <br> • Swagger UI <br> • Postman collection | ✅ Done    |
+| **Phase 2**         | • Products CRUD <br> • Collections API <br> • Cart & session management <br> • Front‑end product pages | 🔜 Next    |
+| **Phase 3**         | • Checkout integration (Stripe) <br> • Order history <br> • Admin dashboard <br> • Webhooks | 🕒 Future |
+| **Phase 4**         | • Optimization & scaling (Redis cache, queue) <br> • Analytics dashboards <br> • Multi‑region deployment | 🕒 Future |
 
-Contributors
+---
 
-License
+## 📁 Folder Structure
 
-🌍 Project Overview
-Luminalogix is a simulated e-commerce ecosystem designed to mimic professional platforms like ASOS, Allbirds, and Aesop, using AI and modern frontend/backend technologies.
+luminalogix/ │ ├─ apps/ │ ├─ client/ # Next.js frontend │ │ ├─ public/ # static assets │ │ ├─ src/ │ │ │ ├─ app/ # Next.js pages/components │ │ │ ├─ components/ # shared UI │ │ │ ├─ styles/ # Tailwind & global CSS │ │ ├─ Dockerfile │ │ ├─ package.json │ │ └─ tsconfig.json │ │ │ └─ server/ # Express + Prisma API │ ├─ prisma/ # schema & migrations │ ├─ src/ │ │ ├─ controllers/ # HTTP → logic │ │ ├─ services/ # business logic │ │ ├─ routes/ # Express routers │ │ ├─ middleware/ # auth, error handling │ │ ├─ utils/ # hash, jwt helpers │ │ └─ index.ts # app entrypoint │ ├─ Dockerfile │ ├─ package.json │ └─ tsconfig.json │ ├─ prisma/ # optional root‑level schema (if used) ├─ docker-compose.yml # local multi‑container setup ├─ README.md # ← you’re reading this └─ render.yaml # Render.com infra as code
 
-The system includes:
+yaml
+Copy
+Edit
 
-A fully responsive frontend with immersive user experience
+---
 
-A backend powered by Node.js, Express, and Prisma
+## ⚙️ Tech Stack
 
-A PostgreSQL database and JWT-based user authentication
+- **Frontend:** Next.js 15, React 19, Framer‑Motion, Tailwind CSS, Zustand  
+- **Backend:** Node.js, Express 5, Prisma 6, PostgreSQL  
+- **Auth:** JWT (jsonwebtoken), bcryptjs  
+- **Docs:** Swagger (swagger-jsdoc, swagger-ui‑express), Postman  
+- **Containers:** Docker, docker‑compose  
+- **Hosting:** Render (free web services + Postgres), Vercel/Neon (alternative)
 
-Future support for AI-based product recommendations, virtual try-ons, and AR/VR commerce tools
+---
 
-⚠️ Note: While product and company details are fabricated for academic purposes, development follows real-world best practices.
+## 🛠 Local Development
 
-🧰 Tech Stack
-🖥 Frontend (Client)
+1. **Clone & install root deps**  
+   ```bash
+   git clone https://github.com/Atlas00000/luminalogix.git
+   cd luminalogix
+Env files
 
-Next.js (App Router)
+Copy .env.example → apps/server/.env and set:
 
-TypeScript
+ini
+Copy
+Edit
+DATABASE_URL="postgres://postgres:postgres@db:5432/luminalogix"
+JWT_SECRET="YOUR_SECRET"
+PORT=5000
+Copy .env.example → apps/client/.env.local and set:
 
-TailwindCSS (Custom Theme)
+ini
+Copy
+Edit
+NEXT_PUBLIC_API_URL="http://localhost:5000"
+PORT=3000
+Start with Docker
 
-Framer Motion (Animations)
+bash
+Copy
+Edit
+docker compose up --build
+Frontend → http://localhost:3000
 
-🧠 Backend (Server)
+Backend → http://localhost:5000/api/health
 
-Node.js + Express
+API Docs
 
-TypeScript
+Swagger UI → http://localhost:5000/api/docs
 
-Prisma (ORM)
+OpenAPI JSON → curl http://localhost:5000/api/docs-json > openapi.json
 
-PostgreSQL
+Run Migrations
 
-JWT + bcryptjs for Authentication
+bash
+Copy
+Edit
+cd apps/server
+npx prisma migrate dev --name init
+🌐 Free Hosting on Render.com
+Push code to GitHub.
 
-Zod (planned) for request validation
+Backend Service
 
-☁️ DevOps & Hosting
+Create Web Service → Docker → Root: apps/server → Dockerfile
 
-Vercel (Frontend)
+Env Vars: set DATABASE_URL, JWT_SECRET
 
-Railway / Render / Docker (Backend API)
+Postgres Database
 
-pgAdmin / Prisma Studio for DB inspection
+Create a free database → copy its connection string → assign to backend’s DATABASE_URL
 
-🏗️ Development Phases
-Each phase is scoped to either the frontend or backend and builds toward a complete MVP → Growth → Optimization cycle.
+Frontend Service
 
-🖼 Frontend Phases
-🎬 UI Foundation
+Create Web Service → Docker → Root: apps/client → Dockerfile
 
-Hero section with animated video & welcome text
+Env Vars: NEXT_PUBLIC_API_URL=https://<backend-url>
 
-Responsive navigation with dropdown
+Start Command: npm start (Dockerfile handles sh -c)
 
-Footer with social/media links
+Run Prisma Migrations
 
-🧩 Pages & Routing
+In Backend’s Render Shell: npx prisma migrate deploy
 
-Setup of: Home, About, Shop, Contact, Journal, Collections
+🤝 API Endpoints
 
-Responsive design with smooth scroll & transitions
+Method	Path	Description
+POST	/api/auth/register	Register user (201)
+POST	/api/auth/login	Login user (200)
+GET	/api/protected/dashboard	Dashboard (auth required)
+GET	/api/protected/admin	Admin only
+GET	/api/protected/staff	Staff/Admin
+GET	/api/health	Health check (public)
+GET	/api/docs	Swagger UI
+📚 Resources & References
+Prisma Schema & Migrations → apps/server/prisma/schema.prisma
 
-🛒 E-commerce Features (Planned)
+Swagger Annotations → in apps/server/src/routes/*.ts
 
-Product grid, detail pages, cart & checkout UI
-
-AR/AI styling widget (planned with WebAR)
-
-🧠 AI & Personalization (Planned)
-
-Personalized homepage with AI-based curation
-
-Virtual try-on preview
-
-🛠 Backend Phases
-⚙️ Phase 1: Core Setup & Auth (Completed)
-
-Project scaffolded under apps/server
-
-PostgreSQL connection via Prisma
-
-Auth service: register, login
-
-Password hashing with bcryptjs
-
-JWT signing & verification
-
-Middleware for protected routes
-
-🛂 Phase 2: Role-Based Access (Planned)
-
-Middleware for admin/customer roles
-
-Authorization guard on sensitive endpoints
-
-📦 Phase 3: Product & Order Models
-
-Product CRUD endpoints
-
-Category & Inventory logic
-
-Order creation + user linkage
-
-🧾 Phase 4: Transactions & Payments
-
-Stripe integration
-
-Secure checkout session management
-
-📊 Phase 5: Analytics, Logs & Monitoring (Planned)
-
-🔑 Core Features
-
-Category	Feature
-Authentication	Register, Login (JWT-based)
-Security	Bcrypt password hashing
-Access Control	Protected Routes with Middleware
-Database ORM	Prisma for PostgreSQL
-UI/UX	Animated hero, responsive navbar
-Routing	Frontend pages (Shop, About, Contact)
-Architecture	Scalable monorepo layout with apps/
-📁 Folder Structure (Monorepo)
-luminalogix/ │ ├── apps/ │ ├── client/ # Frontend (Next.js) │ │ └── src/ │ │ ├── components/ │ │ ├── pages/ │ │ └── styles/ │ └── server/ # Backend (Express API) │ ├── src/ │ │ ├── controllers/ │ │ ├── routes/ │ │ ├── services/ │ │ ├── middleware/ │ │ └── utils/ │ └── prisma/ # Prisma schema & migrations │ ├── README.md └── package.json (workspace root)
-
-🚀 Setup Instructions
-Clone the repo:
-
-bash git clone https://github.com/yourname/luminalogix.git cd luminalogix
-
-Install dependencies (monorepo):
-
-bash npm install
-
-Setup PostgreSQL & Prisma:
-
-Create a database named luminalogix
-
-Fill in apps/server/.env:
-
-DATABASE_URL="postgresql://<user>@localhost:5432/luminalogix"
-
-Then run:
-
-bash cd apps/server npx prisma migrate dev --name init
-
-Start backend server:
-
-bash npm run dev
-
-Start frontend (client):
-
-bash cd apps/client npm run dev
-
-🙋 Contributors
-This project is developed by Celestine Emili for educational & portfolio purposes.
-Feel free to fork or suggest improvements.
-
-📄 License
-This project is open-sourced under the MIT License.
-
+Postman Collection → luminalogix.postman_collection.json
