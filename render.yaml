@@ -1,0 +1,31 @@
+services:
+  # Backend
+  - type: web
+    name: luminalogix-backend
+    env: docker
+    plan: free
+    dockerfilePath: apps/server/Dockerfile
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: luminalogix-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+    autoDeploy: yes
+
+  # Frontend
+  - type: web
+    name: luminalogix-frontend
+    env: docker
+    plan: free
+    dockerfilePath: apps/client/Dockerfile
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        value: https://luminalogix-backend.onrender.com
+    buildFilter:
+      paths: ["apps/client/**"]
+
+databases:
+  - name: luminalogix-db
+    plan: free
